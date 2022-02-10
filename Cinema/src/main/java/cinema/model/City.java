@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class City {
@@ -20,7 +22,8 @@ public class City {
 	private String name;
 	private double longitude, latidude, altitube;
 	@OneToMany(mappedBy="city")
-	@JsonIgnore
+//	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private List<Cinema> cinemas;
 	public Long getCityId() {
 		return cityId;

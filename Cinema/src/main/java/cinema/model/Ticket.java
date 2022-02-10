@@ -2,10 +2,14 @@ package cinema.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Ticket {
@@ -16,11 +20,13 @@ public class Ticket {
 	private String numClient;
 	private double price;
 	@Column(unique=false, nullable=true)
-	private Integer codePayment;
+	private String codePayment=null;
 	private boolean reserve;
 	@ManyToOne
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Place place;
 	@ManyToOne
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private TicketView ticketView;
 	
 	public Long getTicketId() {
@@ -41,10 +47,10 @@ public class Ticket {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getCodePayment() {
+	public String getCodePayment() {
 		return codePayment;
 	}
-	public void setCodePayment(int codePayment) {
+	public void setCodePayment(String codePayment) {
 		this.codePayment = codePayment;
 	}
 	public boolean isReserve() {

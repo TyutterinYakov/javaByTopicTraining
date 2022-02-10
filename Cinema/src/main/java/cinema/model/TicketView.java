@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class TicketView {
@@ -24,9 +27,10 @@ public class TicketView {
 	private Hall hall;
 	@ManyToOne
 	private Film film;
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy="ticketView")
-	private List<Ticket> tikects;
+	@JsonProperty(access = Access.READ_WRITE)
+	private List<Ticket> tickets;
 	@ManyToOne
 	private Seance seance;
 	
@@ -62,17 +66,17 @@ public class TicketView {
 	public void setFilm(Film film) {
 		this.film = film;
 	}
-	public List<Ticket> getTikects() {
-		return tikects;
-	}
-	public void setTikects(List<Ticket> tikects) {
-		this.tikects = tikects;
-	}
 	public Seance getSeance() {
 		return seance;
 	}
 	public void setSeance(Seance seance) {
 		this.seance = seance;
+	}
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 	
 	

@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
@@ -23,10 +25,10 @@ public class Hall {
 	@ManyToOne
 	private Cinema cinema;
 	@OneToMany(mappedBy="hall")
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private List<Place> places;
-	@JsonIgnore
 	@OneToMany(mappedBy="hall")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<TicketView> ticketViews;
 	
 	

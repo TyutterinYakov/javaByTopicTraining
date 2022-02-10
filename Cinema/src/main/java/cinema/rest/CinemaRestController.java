@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import cinema.model.Ticket;
 import cinema.model.TicketForm;
 
 @RestController
+@CrossOrigin("*")
 public class CinemaRestController {
 
 	private FilmRepository filmDao;
@@ -44,7 +46,7 @@ public class CinemaRestController {
 		Optional<Film> film = filmDao.findById(filmId);
 		if(film.isPresent()) {
 			String photoName = film.get().getImage();
-			File file = new File("/Users/asatutterin/eclipse-workspace/Cinema/src/main/resources/static/images/"
+			File file = new File("/Users/asatutterin/eclipse-workspace/javaTraining/Cinema/src/main/resources/static/images/"
 					+photoName+".jpeg");
 			Path path = Paths.get(file.toURI());
 			return Files.readAllBytes(path);

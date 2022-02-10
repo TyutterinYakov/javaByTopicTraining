@@ -154,10 +154,12 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
 	@Override
 	public void initTicketViews() {
 		double[] prices = new double[] {30, 50, 60, 80, 90, 100};
+		List<Film> films = filmDao.findAll(); 
 		cityDao.findAll().forEach(city->{
 			city.getCinemas().forEach((cinema)->{
 				cinema.getHalls().forEach(hall->{
-					filmDao.findAll().forEach((film)->{
+					int index = new Random().nextInt(films.size());
+					Film film = films.get(index);
 						seanceDao.findAll().forEach((seance)->{
 							TicketView ticketView = new TicketView();
 							ticketView.setDateTicket(new Date());
@@ -167,27 +169,39 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
 							ticketView.setSeance(seance);
 							ticketViewDao.save(ticketView);
 						});
-					});
 				});
 			});
 		});
 		
 	}
 
-	@Override
-	public void initTickets() {
-		ticketViewDao.findAll().forEach((v)->{
-			v.getHall().getPlaces().forEach((p)->{
-				Ticket ticket = new Ticket();
-				ticket.setPlace(p);
-				ticket.setPrice(v.getPrice());
-				ticket.setTicketView(v);
-				ticket.setReserve(false);
-				ticketDao.save(ticket);
-				
-			});
-		});
-	}
+//	@Override
+//	public void initTickets() {
+//		ticketViewDao.findAll().forEach((v)->{
+//			v.getHall().getPlaces().forEach((p)->{
+//				Ticket ticket = new Ticket();
+//				ticket.setPlace(p);
+//				ticket.setPrice(v.getPrice());
+//				ticket.setTicketView(v);
+//				ticket.setReserve(false);
+//				ticketDao.save(ticket);
+//				
+//			});
+//		});
+//	}
+    @Override
+    public void initTickets() {
+        ticketViewDao.findAll().forEach(projection -> {
+            projection.getHall().getPlaces().forEach(place -> {
+                Ticket ticket = new Ticket();
+                ticket.setPlace(place);
+                ticket.setPrice(projection.getPrice());
+                ticket.setTicketView(projection);
+                ticket.setReserve(false);
+                ticketDao.save(ticket);
+            });
+        });
+    }
 
 
 }

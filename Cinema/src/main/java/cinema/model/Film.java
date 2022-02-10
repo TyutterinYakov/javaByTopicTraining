@@ -27,10 +27,10 @@ public class Film {
 	private double duration;
 	private String image;
 	@OneToMany(mappedBy="film")
-//	@JsonProperty(access=Access.WRITE_ONLY)
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private List<TicketView> ticketViews;
 	@ManyToOne
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Category category;
 	public Long getFilmId() {
 		return filmId;

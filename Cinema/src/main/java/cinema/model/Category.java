@@ -22,8 +22,8 @@ public class Category {
 	@Column(length=75)
 	private String name;
 	@OneToMany(mappedBy="category")
-//	@JsonProperty(access=Access.READ_ONLY)
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
+//	@JsonIgnore
 	private List<Film> films;
 	public Long getCategoryId() {
 		return categoryId;

@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
+import cinema.model.Film;
+import cinema.model.Hall;
 import cinema.service.ICinemaInitService;
 
 
@@ -12,6 +15,8 @@ import cinema.service.ICinemaInitService;
 public class CinemaApplication implements CommandLineRunner {
 
 	private ICinemaInitService cinemaService;
+	@Autowired
+	private RepositoryRestConfiguration restConfiguration;
 	
 	@Autowired
 	public CinemaApplication(ICinemaInitService cinemaService) {
@@ -25,15 +30,16 @@ public class CinemaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		cinemaService.initCities();
-//		cinemaService.initCinemas();
-//		cinemaService.initHalls();
-//		cinemaService.initPlaces();
-//		cinemaService.initSeances();
-//		cinemaService.initCategories();
-//		cinemaService.initFilms();
-//		cinemaService.initTicketViews();
-//		cinemaService.initTickets();
+		restConfiguration.exposeIdsFor(Film.class, Hall.class);
+		cinemaService.initCities();
+		cinemaService.initCinemas();
+		cinemaService.initHalls();
+		cinemaService.initPlaces();
+		cinemaService.initSeances();
+		cinemaService.initCategories();
+		cinemaService.initFilms();
+		cinemaService.initTicketViews();
+		cinemaService.initTickets();
 //		
 	}
 
