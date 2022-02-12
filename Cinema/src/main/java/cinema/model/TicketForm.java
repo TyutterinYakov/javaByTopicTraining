@@ -6,8 +6,9 @@ import java.util.List;
 public class TicketForm {
 
 	private String numClient;
-	
+	private String codePayment;
 	private List<Long> tickets = new ArrayList<>();
+	
 	public String getNumClient() {
 		return numClient;
 	}
@@ -20,6 +21,13 @@ public class TicketForm {
 	public void setTickets(List<Long> tickets) {
 		this.tickets = tickets;
 	}
+	public String getCodePayment() {
+		return codePayment;
+	}
+	public void setCodePayment(String codePayment) {
+		this.codePayment = codePayment;
+	}
+	
 	
 	
 }

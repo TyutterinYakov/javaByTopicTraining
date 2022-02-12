@@ -63,6 +63,7 @@ public class CinemaRestController {
 			Ticket ticket = ticketDao.findById(t).get();
 			ticket.setNumClient(ticketForm.getNumClient());
 			ticket.setReserve(true);
+			ticket.setCodePayment(ticketForm.getCodePayment());
 			tickets.add(ticketDao.save(ticket));
 		});
 		return tickets;

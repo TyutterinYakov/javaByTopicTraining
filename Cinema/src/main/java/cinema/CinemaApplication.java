@@ -8,6 +8,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import cinema.model.Film;
 import cinema.model.Hall;
+import cinema.model.Ticket;
 import cinema.service.ICinemaInitService;
 
 
@@ -30,7 +31,7 @@ public class CinemaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		restConfiguration.exposeIdsFor(Film.class, Hall.class);
+		restConfiguration.exposeIdsFor(Film.class, Hall.class, Ticket.class);
 		cinemaService.initCities();
 		cinemaService.initCinemas();
 		cinemaService.initHalls();
