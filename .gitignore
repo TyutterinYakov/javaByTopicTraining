@@ -13,6 +13,9 @@ target/
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
+.idea/
+*/.idea/
+.idea
 
 # dependencies
 /node_modules
