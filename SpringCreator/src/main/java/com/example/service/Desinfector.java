@@ -1,14 +1,19 @@
 package com.example.service;
 
-import com.example.ObjectFactory;
+import com.example.annotation.InjectByType;
+import com.example.annotation.Singletone;
 import com.example.interfaces.Announcer;
 import com.example.interfaces.Policeman;
 import com.example.model.Room;
 
+@Singletone
+@Deprecated
 public class Desinfector {
 
-    private Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
-    private Policeman policeman = ObjectFactory.getInstance().createObject(Policeman.class);
+    @InjectByType
+    private Announcer announcer;
+    @InjectByType
+    private Policeman policeman;
 
     public void start(Room room){
         announcer.announce("начинаем дезинфекцию! Все вон!");
